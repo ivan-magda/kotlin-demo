@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ConstraintLayout</string>
+    <string name="content_avatar_image">Avatar Image</string>
+    <string name="text_username">Ivan Magda</string>
+    <string name="text_timestamp">Sep 2 at 10:40pm •</string>
+    <string name="text_post_content">Google’s new ARCore software developer’s kit, announced today, makes augmented reality on Android much more widely available.
+AR is potentially a much bigger deal than virtual reality, because it mixes virtual objects into real spaces on a screen. You enhance the world around you rather than disappearing into another reality altogether. But until now, Google AR was relegated to Project Tango, on phones like the Lenovo Phab 2 Pro, which requires a cumbersome, three-camera setup.</string>
+    <string name="content_dropdown">Dropdown</string>
 </resources>

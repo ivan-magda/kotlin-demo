@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="width_avatar">50dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="tv_margin_small">4dp</dimen>
+    <dimen name="activity_margin">16dp</dimen>
+    <dimen name="width_ic_dropdown">20dp</dimen>
+</resources>
