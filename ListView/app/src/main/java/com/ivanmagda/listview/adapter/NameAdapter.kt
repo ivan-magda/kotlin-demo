@@ -1,24 +1,32 @@
 package com.ivanmagda.listview.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import com.ivanmagda.listview.R
+import com.ivanmagda.listview.model.Person
 
-class NameAdapter(context: Context) : BaseAdapter() {
+class NameAdapter(context: Context, data: Array<Person>) : BaseAdapter() {
 
     private val mContext: Context = context
+    private val mData: Array<Person> = data
 
+    @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, viewGroup: ViewGroup?): View {
-        val textView = TextView(mContext)
-        textView.text = "Here is my text for row: $position"
+        val layoutInflater = LayoutInflater.from(mContext)
+        val view = layoutInflater.inflate(R.layout.row_main, viewGroup, false)
 
-        return textView
+        configure(view, position)
+
+        return view
     }
 
-    override fun getItem(position: Int): Any {
-        return "Test string at position: $position"
+    override fun getItem(position: Int): Person {
+        return mData[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -26,6 +34,15 @@ class NameAdapter(context: Context) : BaseAdapter() {
     }
 
     override fun getCount(): Int {
-        return 10
+        return mData.size
+    }
+
+    private fun configure(view: View, position: Int) {
+        val titleTextView = view.findViewById<TextView>(R.id.tv_title)
+        val subtitleTextView = view.findViewById<TextView>(R.id.tv_subtitle)
+
+        val person = getItem(position)
+        titleTextView.text = person.getName()
+        subtitleTextView.text = person.job
     }
 }
