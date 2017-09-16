@@ -20,92 +20,82 @@
  * THE SOFTWARE.
  */
 
-package com.example.omgandroid;
+package com.example.omgandroid
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.ShareActionProvider;
+import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
+import android.view.Menu
+import android.widget.ImageView
+import android.widget.ShareActionProvider
+import com.squareup.picasso.Picasso
 
-import com.squareup.picasso.Picasso;
+class DetailActivity : Activity() {
 
-public class DetailActivity extends Activity {
+    private val IMAGE_URL_BASE = "http://covers.openlibrary.org/b/id/"
+    private var mImageURL = ""
+    private var mShareActionProvider: ShareActionProvider? = null
 
-    private static final String IMAGE_URL_BASE = "http://covers.openlibrary.org/b/id/";
-
-    String mImageURL = "";
-    ShareActionProvider mShareActionProvider = null;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         // Tell the activity which XML layout is right
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_detail)
 
         // Enable the "Up" button for more navigation options
-        if (null != getActionBar()) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
+        if (null != actionBar) {
+            actionBar!!.setDisplayHomeAsUpEnabled(true)
         }
 
         // Access the imageview from XML
-        ImageView imageView = (ImageView) findViewById(R.id.img_cover);
+        val imageView = findViewById<ImageView>(R.id.img_cover)
 
         // 13. unpack the coverId from its trip inside your Intent
-        String coverId =
-                this.getIntent().getExtras().getString("coverID");
+        val coverId = this.intent.extras!!.getString("coverID")
 
         // See if there is a valid coverId
 
-        if (coverId != null && coverId.length() > 0) {
+        if (coverId != null && coverId.length > 0) {
 
             // Use the ID to construct an image URL
-            mImageURL = IMAGE_URL_BASE + coverId + "-L.jpg";
+            mImageURL = IMAGE_URL_BASE + coverId + "-L.jpg"
 
             // Use Picasso to load the image
             Picasso.with(this)
                     .load(mImageURL)
                     .placeholder(R.drawable.img_books_loading)
-                    .into(imageView);
+                    .into(imageView)
         }
     }
 
-    private void setShareIntent() {
-
+    private fun setShareIntent() {
         // create an Intent with the contents of the TextView
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT,
-                "Book Recommendation!");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, mImageURL);
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "text/plain"
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Book Recommendation!")
+        shareIntent.putExtra(Intent.EXTRA_TEXT, mImageURL)
 
         // Make sure the provider knows
         // it should work with that Intent
-        mShareActionProvider.setShareIntent(shareIntent);
+        mShareActionProvider!!.setShareIntent(shareIntent)
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu
         // this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        menuInflater.inflate(R.menu.main, menu)
 
         // Access the Share Item defined in menu XML
-        MenuItem shareItem = menu.findItem(R.id.menu_item_share);
+        val shareItem = menu.findItem(R.id.menu_item_share)
 
         // Access the object responsible for
         // putting together the sharing submenu
         if (shareItem != null) {
-            mShareActionProvider
-                    = (ShareActionProvider) shareItem.getActionProvider();
+            mShareActionProvider = shareItem.actionProvider as ShareActionProvider
         }
 
-        setShareIntent();
+        setShareIntent()
 
-        return true;
+        return true
     }
 }

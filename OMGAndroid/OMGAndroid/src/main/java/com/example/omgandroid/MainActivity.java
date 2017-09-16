@@ -164,21 +164,18 @@ public class MainActivity extends Activity implements View.OnClickListener,
 
     @Override
     public void onClick(View v) {
-
         // 9. Take what was typed into the EditText and use in search
         queryBooks(mMainEditText.getText().toString());
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent,
-                            View view, int position, long id) {
-
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // 12. Now that the user's chosen a book, grab the cover data
         String coverID =
                 mJSONAdapter.getItem(position).optString("cover_i", "");
 
         // create an Intent to take you over to a new DetailActivity
-        Intent detailIntent = new Intent(this, DetailActivity.class);
+        Intent detailIntent = new Intent(this, DetailActivityKotlin.class);
 
         // pack away the data about the cover
         // into your Intent before you head out
@@ -213,7 +210,6 @@ public class MainActivity extends Activity implements View.OnClickListener,
     }
 
     private void setShareIntent() {
-
         // create an Intent with the contents of the TextView
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
@@ -226,7 +222,6 @@ public class MainActivity extends Activity implements View.OnClickListener,
     }
 
     private void queryBooks(String searchString) {
-
         // Prepare your search string to be put in a URL
         // It might have reserved characters or something
         String urlString = "";
