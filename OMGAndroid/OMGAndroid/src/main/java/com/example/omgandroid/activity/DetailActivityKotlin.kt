@@ -4,10 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.widget.ImageView
 import android.widget.ShareActionProvider
 import com.example.omgandroid.R
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivityKotlin : Activity() {
 
@@ -21,8 +21,6 @@ class DetailActivityKotlin : Activity() {
 
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val imageView: ImageView = findViewById(R.id.img_cover)
-
         val coverId = this.intent.extras.getString("coverID")
         val length = coverId?.length ?: 0
 
@@ -31,7 +29,7 @@ class DetailActivityKotlin : Activity() {
             Picasso.with(this)
                     .load(mImageURL)
                     .placeholder(R.drawable.img_books_loading)
-                    .into(imageView)
+                    .into(img_cover)
         }
     }
 
