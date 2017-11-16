@@ -3,9 +3,9 @@ package com.ivanmagda.kotlinintro.activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.widget.TextView
 import com.ivanmagda.kotlinintro.R
 import com.ivanmagda.kotlinintro.model.Student
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,8 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val textView = findViewById<TextView>(R.id.text_view_main)
-        textView.text = getString(R.string.text_hello)
+        text_view_main.text = getString(R.string.text_hello)
 
         logFizzBuzz(Array(50, { i -> i + 1 }))
 
