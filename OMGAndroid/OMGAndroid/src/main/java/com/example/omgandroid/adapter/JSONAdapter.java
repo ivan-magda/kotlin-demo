@@ -20,8 +20,9 @@
  * THE SOFTWARE.
  */
 
-package com.example.omgandroid;
+package com.example.omgandroid.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.omgandroid.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -43,15 +45,15 @@ public class JSONAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private JSONArray mJsonArray;
 
-    JSONAdapter(Context context,
-                LayoutInflater inflater) {
+    public JSONAdapter(Context context,
+                       LayoutInflater inflater) {
 
         mContext = context;
         mInflater = inflater;
         mJsonArray = new JSONArray();
     }
 
-    void updateData(JSONArray jsonArray) {
+    public void updateData(JSONArray jsonArray) {
 
         // update the adapter's dataset
         mJsonArray = jsonArray;
@@ -76,6 +78,7 @@ public class JSONAdapter extends BaseAdapter {
         return position;
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public View getView(int position,
                         View convertView,

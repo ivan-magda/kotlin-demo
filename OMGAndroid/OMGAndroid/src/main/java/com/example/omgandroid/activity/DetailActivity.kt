@@ -20,7 +20,7 @@
  * THE SOFTWARE.
  */
 
-package com.example.omgandroid
+package com.example.omgandroid.activity
 
 import android.app.Activity
 import android.content.Intent
@@ -28,6 +28,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.widget.ImageView
 import android.widget.ShareActionProvider
+import com.example.omgandroid.R
 import com.squareup.picasso.Picasso
 
 class DetailActivity : Activity() {

@@ -20,7 +20,7 @@
  * THE SOFTWARE.
  */
 
-package com.example.omgandroid;
+package com.example.omgandroid.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -41,6 +41,8 @@ import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.omgandroid.R;
+import com.example.omgandroid.adapter.JSONAdapter;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
