@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.TextView
 import com.ivanmagda.listview.R
 import com.ivanmagda.listview.model.Person
+import kotlinx.android.synthetic.main.row_main.view.*
 
 class NameAdapter(context: Context, data: Array<Person>) : BaseAdapter() {
 
@@ -38,11 +38,9 @@ class NameAdapter(context: Context, data: Array<Person>) : BaseAdapter() {
     }
 
     private fun configure(view: View, position: Int) {
-        val titleTextView = view.findViewById<TextView>(R.id.tv_title)
-        val subtitleTextView = view.findViewById<TextView>(R.id.tv_subtitle)
-
         val person = getItem(position)
-        titleTextView.text = person.getName()
-        subtitleTextView.text = person.job
+
+        view.tv_title.text = person.getName()
+        view.tv_subtitle.text = person.job
     }
 }

@@ -2,10 +2,10 @@ package com.ivanmagda.listview.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.ListView
 import com.ivanmagda.listview.R
 import com.ivanmagda.listview.adapter.NameAdapter
 import com.ivanmagda.listview.model.Person
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun configure() {
-        val listView = findViewById<ListView>(R.id.main_listview)
-        listView.adapter = NameAdapter(this, persons)
+        main_listview.adapter = NameAdapter(this, persons)
     }
 }
