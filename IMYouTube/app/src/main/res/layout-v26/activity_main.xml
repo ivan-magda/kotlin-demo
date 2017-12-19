@@ -4,4 +4,5 @@
     android:id="@+id/rv_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="16dp"
     tools:context="com.ivanmagda.imyoutube.activities.MainActivity" />

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">IMYouTube</string>
+    <string name="cd_header_image_view">Header image view</string>
 </resources>
