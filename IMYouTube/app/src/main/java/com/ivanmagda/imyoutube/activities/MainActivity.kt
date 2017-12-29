@@ -25,21 +25,54 @@ package com.ivanmagda.imyoutube.activities
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
+import com.google.gson.GsonBuilder
 import com.ivanmagda.imyoutube.R
-import com.ivanmagda.imyoutube.adapters.MainAdapter
+import com.ivanmagda.imyoutube.adapters.HomeFeedAdapter
+import com.ivanmagda.imyoutube.model.HomeFeed
 import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.*
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
+
+    private val LOG_TAG = MainActivity::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         setup()
+        fetchData()
     }
 
     private fun setup() {
         rv_main.layoutManager = LinearLayoutManager(this)
-        rv_main.adapter = MainAdapter()
+        rv_main.adapter = HomeFeedAdapter()
+    }
+
+    private fun fetchData() {
+        val request = Request.Builder()
+                .url("http://api.letsbuildthatapp.com/youtube/home_feed")
+                .build()
+        val client = OkHttpClient()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call?, e: IOException?) {
+                Log.e(LOG_TAG, "Failed to execute request with error: ${e?.localizedMessage}")
+            }
+
+            override fun onResponse(call: Call?, response: Response?) {
+                val body = response?.body()?.string()
+                Log.d(LOG_TAG, "Request response: $body")
+
+                val gson = GsonBuilder().create()
+                val homeFeed = gson.fromJson(body, HomeFeed::class.java)
+                Log.d(LOG_TAG, "Home feed object: $homeFeed")
+
+                runOnUiThread {
+                    rv_main.adapter = HomeFeedAdapter(homeFeed)
+                }
+            }
+        })
     }
 }
