@@ -27,25 +27,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ivanmagda.imyoutube.R
+import com.ivanmagda.imyoutube.model.HomeFeed
+import com.ivanmagda.imyoutube.model.Video
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class MainAdapter : RecyclerView.Adapter<ViewHolder>() {
+class HomeFeedAdapter(val homeFeed: HomeFeed = HomeFeed()) : RecyclerView.Adapter<HomeFeedViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeFeedViewHolder {
         val layoutInflater = LayoutInflater.from(parent?.context)
         val view = layoutInflater.inflate(R.layout.list_item, parent, false)
 
-        view.tv_list_item.text = "123"
-
-        return ViewHolder(view)
+        return HomeFeedViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return 4
+        return homeFeed.videos.count()
     }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: HomeFeedViewHolder?, position: Int) {
+        holder?.configure(homeFeed.videos[position])
     }
 }
 
-class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+class HomeFeedViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    fun configure(video: Video) {
+        view.tv_list_item.text = video.name
+    }
+}
