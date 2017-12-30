@@ -1,26 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/iv_list_item"
+        android:id="@+id/iv_list_item_video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/cd_header_image_view"
+        android:layout_marginTop="@dimen/iv_margin_vertical"
+        android:contentDescription="@string/cd_video_image_view"
+        android:paddingBottom="@dimen/iv_margin_vertical"
+        android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_list_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Title"
-        app:layout_constraintEnd_toEndOf="parent"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_list_item_profile"
+        android:layout_width="@dimen/iv_list_item_profile_size"
+        android:layout_height="@dimen/iv_list_item_profile_size"
+        android:contentDescription="@string/cd_profile_image_view"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_list_item" />
+        app:layout_constraintTop_toBottomOf="@id/iv_list_item_video" />
+
+    <TextView
+        android:id="@+id/tv_list_item_video"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/tv_margin_start"
+        android:layout_marginStart="@dimen/tv_margin_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_list_item_profile"
+        app:layout_constraintTop_toTopOf="@id/iv_list_item_profile"
+        tools:text="Video Title" />
+
+    <TextView
+        android:id="@+id/tv_list_item_channel"
+        style="@style/TextAppearance.AppCompat.Caption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/tv_list_item_video"
+        app:layout_constraintStart_toStartOf="@id/tv_list_item_video"
+        app:layout_constraintTop_toBottomOf="@+id/tv_list_item_video"
+        tools:text="Channel Title" />
 
 </android.support.constraint.ConstraintLayout>
