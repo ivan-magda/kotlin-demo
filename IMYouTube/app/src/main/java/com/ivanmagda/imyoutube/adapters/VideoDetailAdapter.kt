@@ -20,31 +20,38 @@
  * THE SOFTWARE.
  */
 
-package com.ivanmagda.imyoutube.activities
+package com.ivanmagda.imyoutube.adapters
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import android.annotation.SuppressLint
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.ivanmagda.imyoutube.R
-import com.ivanmagda.imyoutube.adapters.VideoDetailAdapter
-import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.video_detail_list_item.view.*
 
-class VideoDetailActivity : AppCompatActivity() {
+class VideoDetailAdapter : RecyclerView.Adapter<VideoDetailAdapter.VideoDetailViewHolder>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
-        setup()
+    override fun getItemCount(): Int {
+        return 5
     }
 
-    private fun setup() {
-        val layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        rv_video_detail.layoutManager = layoutManager
-        rv_video_detail.adapter = VideoDetailAdapter()
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): VideoDetailViewHolder {
+        val layoutInflater = LayoutInflater.from(parent?.context)
+        val view = layoutInflater.inflate(R.layout.video_detail_list_item, parent, false)
 
-        val dividerItemDecoration = DividerItemDecoration(rv_video_detail.context, layoutManager.orientation)
-        rv_video_detail.addItemDecoration(dividerItemDecoration)
+        return VideoDetailViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: VideoDetailViewHolder?, position: Int) {
+        holder?.bindAt(position)
+    }
+
+    inner class VideoDetailViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+        @SuppressLint("SetTextI18n")
+        fun bindAt(position: Int) {
+            view.tv_detail_name.text = "Title ${position + 1}"
+            view.tv_detail_subtitle.text = "Subtitle ${position + 1}"
+        }
     }
 }
