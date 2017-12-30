@@ -22,8 +22,42 @@
 
 package com.ivanmagda.imyoutube.model
 
+import android.os.Parcel
+import android.os.Parcelable
+
 class Video(val id: Int, val name: String, val link: String, val imageUrl: String,
-            val numberOfViews: Int, val channel: Channel) {
+            val numberOfViews: Int, val channel: Channel) : Parcelable {
+
+    constructor(parcel: Parcel) : this(
+            parcel.readInt(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readInt(),
+            parcel.readParcelable(Channel::class.java.classLoader))
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
+        parcel.writeString(name)
+        parcel.writeString(link)
+        parcel.writeString(imageUrl)
+        parcel.writeInt(numberOfViews)
+        parcel.writeParcelable(channel, flags)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Video> {
+        override fun createFromParcel(parcel: Parcel): Video {
+            return Video(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Video?> {
+            return arrayOfNulls(size)
+        }
+    }
 
     override fun toString(): String {
         return "Video(id=$id, name='$name', link='$link', imageUrl='$imageUrl', numberOfViews=$numberOfViews, channel=$channel)"
