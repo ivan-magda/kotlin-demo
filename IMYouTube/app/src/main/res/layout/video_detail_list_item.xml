@@ -12,19 +12,19 @@
         android:layout_height="84dp"
         android:layout_marginTop="@dimen/iv_margin_vertical"
         android:contentDescription="@string/cd_video_image_view"
-        android:paddingEnd="@dimen/iv_padding_horizontal_medium"
-        android:paddingRight="@dimen/iv_padding_horizontal_medium"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlSymmetry" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_detail_name"
+
         style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/iv_padding_horizontal_medium"
+        android:layout_marginStart="@dimen/iv_padding_horizontal_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_detail_video"
         app:layout_constraintTop_toTopOf="@id/iv_detail_video"
