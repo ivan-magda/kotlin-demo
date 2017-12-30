@@ -28,9 +28,11 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import com.google.gson.GsonBuilder
 import com.ivanmagda.imyoutube.R
 import com.ivanmagda.imyoutube.adapters.VideoDetailAdapter
 import com.ivanmagda.imyoutube.model.Video
+import com.ivanmagda.imyoutube.model.VideoEntry
 import kotlinx.android.synthetic.main.activity_detail.*
 import okhttp3.*
 import java.io.IOException
@@ -44,6 +46,7 @@ class VideoDetailActivity : AppCompatActivity() {
     }
 
     private lateinit var video: Video
+    private lateinit var videoDetailAdapter: VideoDetailAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +61,9 @@ class VideoDetailActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rv_video_detail.layoutManager = layoutManager
-        rv_video_detail.adapter = VideoDetailAdapter()
+
+        videoDetailAdapter = VideoDetailAdapter()
+        rv_video_detail.adapter = videoDetailAdapter
 
         val dividerItemDecoration = DividerItemDecoration(rv_video_detail.context, layoutManager.orientation)
         rv_video_detail.addItemDecoration(dividerItemDecoration)
@@ -87,6 +92,14 @@ class VideoDetailActivity : AppCompatActivity() {
             override fun onResponse(call: Call?, response: Response?) {
                 val body = response?.body()?.string()
                 Log.d(LOG_TAG, "Request response: $body")
+
+                val gson = GsonBuilder().create()
+                val entries = gson.fromJson(body, Array<VideoEntry>::class.java)
+                Log.d(LOG_TAG, "Did fetched video detail items: $entries")
+
+                runOnUiThread {
+                    videoDetailAdapter.entries = entries
+                }
             }
         })
     }
