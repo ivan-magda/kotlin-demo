@@ -38,9 +38,9 @@ import okhttp3.*
 import java.io.IOException
 
 
-class MainActivity : AppCompatActivity(), HomeFeedAdapter.OnClickListener {
+class FeedActivity : AppCompatActivity(), HomeFeedAdapter.OnClickListener {
 
-    private val LOG_TAG = MainActivity::class.java.simpleName
+    private val LOG_TAG = FeedActivity::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity(), HomeFeedAdapter.OnClickListener {
                 Log.d(LOG_TAG, "Home feed object: $homeFeed")
 
                 runOnUiThread {
-                    rv_main.adapter = HomeFeedAdapter(homeFeed, this@MainActivity)
+                    rv_main.adapter = HomeFeedAdapter(homeFeed, this@FeedActivity)
                 }
             }
         })
