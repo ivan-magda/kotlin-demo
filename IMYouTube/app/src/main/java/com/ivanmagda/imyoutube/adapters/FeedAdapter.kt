@@ -32,9 +32,15 @@ import com.ivanmagda.imyoutube.model.Video
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.feed_list_item.view.*
 
-class FeedAdapter(val feed: Feed = Feed(),
+class FeedAdapter(feed: Feed = Feed(),
                   val clickListener: OnClickListener? = null)
     : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
+
+    var feed = feed
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     /**
      * The interface that receives onClick messages.
