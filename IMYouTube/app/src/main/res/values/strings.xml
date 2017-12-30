@@ -2,4 +2,5 @@
     <string name="app_name">IMYouTube</string>
     <string name="cd_video_image_view">Video image</string>
     <string name="cd_profile_image_view">Profile image</string>
+    <string name="activity_detail_label">Detail</string>
 </resources>
