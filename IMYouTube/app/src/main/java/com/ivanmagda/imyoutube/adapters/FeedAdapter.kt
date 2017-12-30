@@ -30,7 +30,7 @@ import com.ivanmagda.imyoutube.R
 import com.ivanmagda.imyoutube.model.Feed
 import com.ivanmagda.imyoutube.model.Video
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.list_item.view.*
+import kotlinx.android.synthetic.main.feed_list_item.view.*
 
 class FeedAdapter(val feed: Feed = Feed(),
                   val clickListener: OnClickListener? = null)
@@ -49,7 +49,7 @@ class FeedAdapter(val feed: Feed = Feed(),
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeFeedViewHolder {
         val layoutInflater = LayoutInflater.from(parent?.context)
-        val view = layoutInflater.inflate(R.layout.list_item, parent, false)
+        val view = layoutInflater.inflate(R.layout.feed_list_item, parent, false)
 
         return HomeFeedViewHolder(view)
     }
