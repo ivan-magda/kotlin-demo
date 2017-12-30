@@ -52,7 +52,7 @@ class FeedActivity : AppCompatActivity(), FeedAdapter.OnClickListener {
     }
 
     override fun onClick(selectedVideo: Video, position: Int) {
-        val intent = Intent(this, DetailActivity::class.java)
+        val intent = Intent(this, VideoDetailActivity::class.java)
         startActivity(intent)
     }
 
