@@ -22,6 +22,7 @@
 
 package com.ivanmagda.imyoutube.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -51,7 +52,8 @@ class FeedActivity : AppCompatActivity(), FeedAdapter.OnClickListener {
     }
 
     override fun onClick(selectedVideo: Video, position: Int) {
-        Log.d(LOG_TAG, "Did select video: $selectedVideo at index $position")
+        val intent = Intent(this, DetailActivity::class.java)
+        startActivity(intent)
     }
 
     private fun setup() {
