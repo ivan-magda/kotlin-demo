@@ -34,7 +34,7 @@ import com.ivanmagda.imyoutube.R
 import com.ivanmagda.imyoutube.adapters.FeedAdapter
 import com.ivanmagda.imyoutube.model.Feed
 import com.ivanmagda.imyoutube.model.Video
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_feed.*
 import okhttp3.*
 import java.io.IOException
 
@@ -45,7 +45,7 @@ class FeedActivity : AppCompatActivity(), FeedAdapter.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_feed)
 
         setup()
         fetchData()
