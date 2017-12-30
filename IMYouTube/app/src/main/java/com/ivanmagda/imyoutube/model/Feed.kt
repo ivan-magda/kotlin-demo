@@ -22,7 +22,30 @@
 
 package com.ivanmagda.imyoutube.model
 
-class Feed(val videos: List<Video> = ArrayList()) {
+import android.os.Parcel
+import android.os.Parcelable
+
+class Feed(val videos: List<Video> = ArrayList()) : Parcelable {
+
+    constructor(parcel: Parcel) : this(parcel.createTypedArrayList(Video))
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeTypedList(videos)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Feed> {
+        override fun createFromParcel(parcel: Parcel): Feed {
+            return Feed(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Feed?> {
+            return arrayOfNulls(size)
+        }
+    }
 
     override fun toString(): String {
         return "Feed(videos=$videos)"
