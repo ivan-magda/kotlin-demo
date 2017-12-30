@@ -43,6 +43,8 @@ class FeedActivity : AppCompatActivity(), FeedAdapter.OnClickListener {
 
     private val LOG_TAG = FeedActivity::class.java.simpleName
 
+    private lateinit var feedAdapter: FeedAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feed)
@@ -53,13 +55,16 @@ class FeedActivity : AppCompatActivity(), FeedAdapter.OnClickListener {
 
     override fun onClick(selectedVideo: Video, position: Int) {
         val intent = Intent(this, VideoDetailActivity::class.java)
+        intent.putExtra(VideoDetailActivity.VIDEO_EXTRA_KEY, feedAdapter.feed.videos[position])
         startActivity(intent)
     }
 
     private fun setup() {
         val layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rv_feed.layoutManager = layoutManager
-        rv_feed.adapter = FeedAdapter()
+
+        feedAdapter = FeedAdapter(Feed(), this)
+        rv_feed.adapter = feedAdapter
 
         val dividerItemDecoration = DividerItemDecoration(rv_feed.context, layoutManager.orientation)
         rv_feed.addItemDecoration(dividerItemDecoration)
@@ -84,7 +89,7 @@ class FeedActivity : AppCompatActivity(), FeedAdapter.OnClickListener {
                 Log.d(LOG_TAG, "Home feed object: $homeFeed")
 
                 runOnUiThread {
-                    rv_feed.adapter = FeedAdapter(homeFeed, this@FeedActivity)
+                    feedAdapter.feed = homeFeed
                 }
             }
         })

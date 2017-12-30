@@ -29,9 +29,16 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.ivanmagda.imyoutube.R
 import com.ivanmagda.imyoutube.adapters.VideoDetailAdapter
+import com.ivanmagda.imyoutube.model.Video
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class VideoDetailActivity : AppCompatActivity() {
+
+    companion object {
+        val VIDEO_EXTRA_KEY = "com.ivanmagda.imyoutube.adapters.VideoDetailAdapter.video"
+    }
+
+    private lateinit var video: Video
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,11 +47,23 @@ class VideoDetailActivity : AppCompatActivity() {
     }
 
     private fun setup() {
+        readExtras()
+
         val layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rv_video_detail.layoutManager = layoutManager
         rv_video_detail.adapter = VideoDetailAdapter()
 
         val dividerItemDecoration = DividerItemDecoration(rv_video_detail.context, layoutManager.orientation)
         rv_video_detail.addItemDecoration(dividerItemDecoration)
+
+        supportActionBar?.title = video.name
+    }
+
+    private fun readExtras() {
+        if (intent.hasExtra(VIDEO_EXTRA_KEY)) {
+            video = intent.getParcelableExtra(VIDEO_EXTRA_KEY)
+        } else {
+            throw IllegalArgumentException("Put video in the intent extras to be able to see details!")
+        }
     }
 }
