@@ -32,7 +32,20 @@ import com.ivanmagda.imyoutube.model.Video
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class HomeFeedAdapter(val homeFeed: HomeFeed = HomeFeed()) : RecyclerView.Adapter<HomeFeedViewHolder>() {
+class HomeFeedAdapter(val homeFeed: HomeFeed = HomeFeed(),
+                      val clickListener: OnClickListener? = null)
+    : RecyclerView.Adapter<HomeFeedAdapter.HomeFeedViewHolder>() {
+
+    /**
+     * The interface that receives onClick messages.
+     */
+    interface OnClickListener {
+        /**
+         * @param selectedVideo Selected video.
+         * @param position      Index of the selected item.
+         */
+        fun onClick(selectedVideo: Video, position: Int)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeFeedViewHolder {
         val layoutInflater = LayoutInflater.from(parent?.context)
@@ -48,15 +61,24 @@ class HomeFeedAdapter(val homeFeed: HomeFeed = HomeFeed()) : RecyclerView.Adapte
     override fun onBindViewHolder(holder: HomeFeedViewHolder?, position: Int) {
         holder?.configure(homeFeed.videos[position])
     }
-}
 
-class HomeFeedViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-    fun configure(video: Video) {
-        view.tv_list_item_video.text = video.name
-        view.tv_list_item_channel.text = video.channel.name
+    inner class HomeFeedViewHolder(val view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
 
-        val picasso = Picasso.with(view.context)
-        picasso.load(video.imageUrl).into(view.iv_list_item_video)
-        picasso.load(video.channel.profileImageUrl).into(view.iv_list_item_profile)
+        init {
+            view.setOnClickListener(this)
+        }
+
+        override fun onClick(view: View?) {
+            clickListener?.onClick(homeFeed.videos[adapterPosition], adapterPosition)
+        }
+
+        fun configure(video: Video) {
+            view.tv_list_item_video.text = video.name
+            view.tv_list_item_channel.text = video.channel.name
+
+            val picasso = Picasso.with(view.context)
+            picasso.load(video.imageUrl).into(view.iv_list_item_video)
+            picasso.load(video.channel.profileImageUrl).into(view.iv_list_item_profile)
+        }
     }
 }

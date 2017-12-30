@@ -32,12 +32,13 @@ import com.google.gson.GsonBuilder
 import com.ivanmagda.imyoutube.R
 import com.ivanmagda.imyoutube.adapters.HomeFeedAdapter
 import com.ivanmagda.imyoutube.model.HomeFeed
+import com.ivanmagda.imyoutube.model.Video
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
 import java.io.IOException
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HomeFeedAdapter.OnClickListener {
 
     private val LOG_TAG = MainActivity::class.java.simpleName
 
@@ -47,6 +48,10 @@ class MainActivity : AppCompatActivity() {
 
         setup()
         fetchData()
+    }
+
+    override fun onClick(selectedVideo: Video, position: Int) {
+        Log.d(LOG_TAG, "Did select video: $selectedVideo at index $position")
     }
 
     private fun setup() {
@@ -77,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d(LOG_TAG, "Home feed object: $homeFeed")
 
                 runOnUiThread {
-                    rv_main.adapter = HomeFeedAdapter(homeFeed)
+                    rv_main.adapter = HomeFeedAdapter(homeFeed, this@MainActivity)
                 }
             }
         })
