@@ -34,7 +34,7 @@ import kotlinx.android.synthetic.main.feed_list_item.view.*
 
 class FeedAdapter(val feed: Feed = Feed(),
                   val clickListener: OnClickListener? = null)
-    : RecyclerView.Adapter<FeedAdapter.HomeFeedViewHolder>() {
+    : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
     /**
      * The interface that receives onClick messages.
@@ -47,22 +47,22 @@ class FeedAdapter(val feed: Feed = Feed(),
         fun onClick(selectedVideo: Video, position: Int)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeFeedViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): FeedViewHolder {
         val layoutInflater = LayoutInflater.from(parent?.context)
         val view = layoutInflater.inflate(R.layout.feed_list_item, parent, false)
 
-        return HomeFeedViewHolder(view)
+        return FeedViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return feed.videos.count()
     }
 
-    override fun onBindViewHolder(holder: HomeFeedViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: FeedViewHolder?, position: Int) {
         holder?.configure(feed.videos[position])
     }
 
-    inner class HomeFeedViewHolder(val view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+    inner class FeedViewHolder(val view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
 
         init {
             view.setOnClickListener(this)
