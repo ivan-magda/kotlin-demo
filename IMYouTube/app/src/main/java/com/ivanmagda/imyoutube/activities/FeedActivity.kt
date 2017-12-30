@@ -58,11 +58,11 @@ class FeedActivity : AppCompatActivity(), FeedAdapter.OnClickListener {
 
     private fun setup() {
         val layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        rv_main.layoutManager = layoutManager
-        rv_main.adapter = FeedAdapter()
+        rv_feed.layoutManager = layoutManager
+        rv_feed.adapter = FeedAdapter()
 
-        val dividerItemDecoration = DividerItemDecoration(rv_main.context, layoutManager.orientation)
-        rv_main.addItemDecoration(dividerItemDecoration)
+        val dividerItemDecoration = DividerItemDecoration(rv_feed.context, layoutManager.orientation)
+        rv_feed.addItemDecoration(dividerItemDecoration)
     }
 
     private fun fetchData() {
@@ -84,7 +84,7 @@ class FeedActivity : AppCompatActivity(), FeedAdapter.OnClickListener {
                 Log.d(LOG_TAG, "Home feed object: $homeFeed")
 
                 runOnUiThread {
-                    rv_main.adapter = FeedAdapter(homeFeed, this@FeedActivity)
+                    rv_feed.adapter = FeedAdapter(homeFeed, this@FeedActivity)
                 }
             }
         })
