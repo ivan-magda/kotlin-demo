@@ -27,12 +27,17 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import com.ivanmagda.imyoutube.R
 import com.ivanmagda.imyoutube.adapters.VideoDetailAdapter
 import com.ivanmagda.imyoutube.model.Video
 import kotlinx.android.synthetic.main.activity_detail.*
+import okhttp3.*
+import java.io.IOException
 
 class VideoDetailActivity : AppCompatActivity() {
+
+    private val LOG_TAG = VideoDetailActivity::class.java.simpleName
 
     companion object {
         val VIDEO_EXTRA_KEY = "com.ivanmagda.imyoutube.adapters.VideoDetailAdapter.video"
@@ -43,7 +48,9 @@ class VideoDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+
         setup()
+        fetchData()
     }
 
     private fun setup() {
@@ -65,5 +72,22 @@ class VideoDetailActivity : AppCompatActivity() {
         } else {
             throw IllegalArgumentException("Put video in the intent extras to be able to see details!")
         }
+    }
+
+    private fun fetchData() {
+        val request = Request.Builder()
+                .url("http://api.letsbuildthatapp.com/youtube/course_detail?id=${video.id}")
+                .build()
+        val client = OkHttpClient()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call?, e: IOException?) {
+                Log.e(LOG_TAG, "Failed to execute request with error: ${e?.localizedMessage}")
+            }
+
+            override fun onResponse(call: Call?, response: Response?) {
+                val body = response?.body()?.string()
+                Log.d(LOG_TAG, "Request response: $body")
+            }
+        })
     }
 }
