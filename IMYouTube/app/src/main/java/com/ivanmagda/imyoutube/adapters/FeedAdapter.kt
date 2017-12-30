@@ -27,12 +27,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ivanmagda.imyoutube.R
-import com.ivanmagda.imyoutube.model.HomeFeed
+import com.ivanmagda.imyoutube.model.Feed
 import com.ivanmagda.imyoutube.model.Video
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class FeedAdapter(val homeFeed: HomeFeed = HomeFeed(),
+class FeedAdapter(val feed: Feed = Feed(),
                   val clickListener: OnClickListener? = null)
     : RecyclerView.Adapter<FeedAdapter.HomeFeedViewHolder>() {
 
@@ -55,11 +55,11 @@ class FeedAdapter(val homeFeed: HomeFeed = HomeFeed(),
     }
 
     override fun getItemCount(): Int {
-        return homeFeed.videos.count()
+        return feed.videos.count()
     }
 
     override fun onBindViewHolder(holder: HomeFeedViewHolder?, position: Int) {
-        holder?.configure(homeFeed.videos[position])
+        holder?.configure(feed.videos[position])
     }
 
     inner class HomeFeedViewHolder(val view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
@@ -69,7 +69,7 @@ class FeedAdapter(val homeFeed: HomeFeed = HomeFeed(),
         }
 
         override fun onClick(view: View?) {
-            clickListener?.onClick(homeFeed.videos[adapterPosition], adapterPosition)
+            clickListener?.onClick(feed.videos[adapterPosition], adapterPosition)
         }
 
         fun configure(video: Video) {

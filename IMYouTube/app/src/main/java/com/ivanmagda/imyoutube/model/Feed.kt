@@ -22,9 +22,9 @@
 
 package com.ivanmagda.imyoutube.model
 
-class HomeFeed(val videos: List<Video> = ArrayList()) {
+class Feed(val videos: List<Video> = ArrayList()) {
 
     override fun toString(): String {
-        return "HomeFeed(videos=$videos)"
+        return "Feed(videos=$videos)"
     }
 }

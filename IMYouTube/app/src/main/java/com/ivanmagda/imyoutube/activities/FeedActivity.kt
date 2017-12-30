@@ -31,7 +31,7 @@ import android.util.Log
 import com.google.gson.GsonBuilder
 import com.ivanmagda.imyoutube.R
 import com.ivanmagda.imyoutube.adapters.FeedAdapter
-import com.ivanmagda.imyoutube.model.HomeFeed
+import com.ivanmagda.imyoutube.model.Feed
 import com.ivanmagda.imyoutube.model.Video
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
@@ -78,7 +78,7 @@ class FeedActivity : AppCompatActivity(), FeedAdapter.OnClickListener {
                 Log.d(LOG_TAG, "Request response: $body")
 
                 val gson = GsonBuilder().create()
-                val homeFeed = gson.fromJson(body, HomeFeed::class.java)
+                val homeFeed = gson.fromJson(body, Feed::class.java)
                 Log.d(LOG_TAG, "Home feed object: $homeFeed")
 
                 runOnUiThread {
