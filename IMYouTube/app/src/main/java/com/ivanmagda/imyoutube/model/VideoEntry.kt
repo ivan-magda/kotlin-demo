@@ -56,4 +56,8 @@ class VideoEntry(val name: String, val duration: String, val number: Int, val im
             return arrayOfNulls(size)
         }
     }
+
+    override fun toString(): String {
+        return "VideoEntry(name='$name', duration='$duration', number=$number, imageUrl='$imageUrl', link='$link')"
+    }
 }
