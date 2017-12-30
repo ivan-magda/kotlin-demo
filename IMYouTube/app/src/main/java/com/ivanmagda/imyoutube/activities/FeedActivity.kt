@@ -30,7 +30,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.google.gson.GsonBuilder
 import com.ivanmagda.imyoutube.R
-import com.ivanmagda.imyoutube.adapters.HomeFeedAdapter
+import com.ivanmagda.imyoutube.adapters.FeedAdapter
 import com.ivanmagda.imyoutube.model.HomeFeed
 import com.ivanmagda.imyoutube.model.Video
 import kotlinx.android.synthetic.main.activity_main.*
@@ -38,7 +38,7 @@ import okhttp3.*
 import java.io.IOException
 
 
-class FeedActivity : AppCompatActivity(), HomeFeedAdapter.OnClickListener {
+class FeedActivity : AppCompatActivity(), FeedAdapter.OnClickListener {
 
     private val LOG_TAG = FeedActivity::class.java.simpleName
 
@@ -57,7 +57,7 @@ class FeedActivity : AppCompatActivity(), HomeFeedAdapter.OnClickListener {
     private fun setup() {
         val layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rv_main.layoutManager = layoutManager
-        rv_main.adapter = HomeFeedAdapter()
+        rv_main.adapter = FeedAdapter()
 
         val dividerItemDecoration = DividerItemDecoration(rv_main.context, layoutManager.orientation)
         rv_main.addItemDecoration(dividerItemDecoration)
@@ -82,7 +82,7 @@ class FeedActivity : AppCompatActivity(), HomeFeedAdapter.OnClickListener {
                 Log.d(LOG_TAG, "Home feed object: $homeFeed")
 
                 runOnUiThread {
-                    rv_main.adapter = HomeFeedAdapter(homeFeed, this@FeedActivity)
+                    rv_main.adapter = FeedAdapter(homeFeed, this@FeedActivity)
                 }
             }
         })

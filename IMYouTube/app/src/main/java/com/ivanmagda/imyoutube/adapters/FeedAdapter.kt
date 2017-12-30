@@ -32,9 +32,9 @@ import com.ivanmagda.imyoutube.model.Video
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class HomeFeedAdapter(val homeFeed: HomeFeed = HomeFeed(),
-                      val clickListener: OnClickListener? = null)
-    : RecyclerView.Adapter<HomeFeedAdapter.HomeFeedViewHolder>() {
+class FeedAdapter(val homeFeed: HomeFeed = HomeFeed(),
+                  val clickListener: OnClickListener? = null)
+    : RecyclerView.Adapter<FeedAdapter.HomeFeedViewHolder>() {
 
     /**
      * The interface that receives onClick messages.
