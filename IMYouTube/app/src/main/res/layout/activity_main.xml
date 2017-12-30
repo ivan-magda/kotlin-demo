@@ -11,5 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingBottom="16dp" />
+        android:paddingBottom="@dimen/rv_padding_default"
+        android:paddingEnd="@dimen/rv_padding_default"
+        android:paddingLeft="@dimen/rv_padding_default"
+        android:paddingRight="@dimen/rv_padding_default"
+        android:paddingStart="@dimen/rv_padding_default" />
 </LinearLayout>
