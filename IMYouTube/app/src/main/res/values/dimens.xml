@@ -4,4 +4,5 @@
     <dimen name="tv_margin_start">8dp</dimen>
     <dimen name="iv_margin_vertical">16dp</dimen>
     <dimen name="iv_list_item_profile_size">44dp</dimen>
+    <dimen name="list_item_padding_default">16dp</dimen>
 </resources>

@@ -24,7 +24,9 @@ package com.ivanmagda.imyoutube.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.google.gson.GsonBuilder
 import com.ivanmagda.imyoutube.R
@@ -33,6 +35,7 @@ import com.ivanmagda.imyoutube.model.HomeFeed
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
 import java.io.IOException
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,8 +50,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setup() {
-        rv_main.layoutManager = LinearLayoutManager(this)
+        val layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        rv_main.layoutManager = layoutManager
         rv_main.adapter = HomeFeedAdapter()
+
+        val dividerItemDecoration = DividerItemDecoration(rv_main.context, layoutManager.orientation)
+        rv_main.addItemDecoration(dividerItemDecoration)
     }
 
     private fun fetchData() {
