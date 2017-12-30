@@ -29,6 +29,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ivanmagda.imyoutube.R
 import com.ivanmagda.imyoutube.model.VideoEntry
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.video_detail_list_item.view.*
 
 class VideoDetailAdapter(entries: Array<VideoEntry> = emptyArray())
@@ -62,6 +63,7 @@ class VideoDetailAdapter(entries: Array<VideoEntry> = emptyArray())
 
             view.tv_detail_name.text = entry.name
             view.tv_detail_subtitle.text = "Episode # ${position + 1}"
+            Picasso.with(view.context).load(entry.imageUrl).into(view.iv_detail_video)
         }
     }
 }
