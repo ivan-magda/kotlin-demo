@@ -37,7 +37,7 @@ import kotlinx.android.synthetic.main.activity_detail.*
 import okhttp3.*
 import java.io.IOException
 
-class VideoDetailActivity : AppCompatActivity() {
+class VideoDetailActivity : AppCompatActivity(), VideoDetailAdapter.OnClickListener {
 
     private val LOG_TAG = VideoDetailActivity::class.java.simpleName
 
@@ -56,13 +56,17 @@ class VideoDetailActivity : AppCompatActivity() {
         fetchData()
     }
 
+    override fun onClick(selectedEntry: VideoEntry, position: Int) {
+        Log.d(LOG_TAG, "onClick(selectedEntry: VideoEntry, position: Int)")
+    }
+
     private fun setup() {
         readExtras()
 
         val layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rv_video_detail.layoutManager = layoutManager
 
-        videoDetailAdapter = VideoDetailAdapter()
+        videoDetailAdapter = VideoDetailAdapter(onClickListener = this)
         rv_video_detail.adapter = videoDetailAdapter
 
         val dividerItemDecoration = DividerItemDecoration(rv_video_detail.context, layoutManager.orientation)

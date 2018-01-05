@@ -32,7 +32,8 @@ import com.ivanmagda.imyoutube.model.VideoEntry
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.video_detail_list_item.view.*
 
-class VideoDetailAdapter(entries: Array<VideoEntry> = emptyArray())
+class VideoDetailAdapter(entries: Array<VideoEntry> = emptyArray(),
+                         val onClickListener: OnClickListener? = null)
     : RecyclerView.Adapter<VideoDetailAdapter.VideoDetailViewHolder>() {
 
     var entries = entries
@@ -40,6 +41,17 @@ class VideoDetailAdapter(entries: Array<VideoEntry> = emptyArray())
             field = value
             notifyDataSetChanged()
         }
+
+    /**
+     * The interface that receives onClick messages.
+     */
+    interface OnClickListener {
+        /**
+         * @param selectedEntry Selected video entry.
+         * @param position      Index of the selected item.
+         */
+        fun onClick(selectedEntry: VideoEntry, position: Int)
+    }
 
     override fun getItemCount(): Int {
         return entries.size
@@ -56,7 +68,16 @@ class VideoDetailAdapter(entries: Array<VideoEntry> = emptyArray())
         holder?.bindAt(position)
     }
 
-    inner class VideoDetailViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    inner class VideoDetailViewHolder(private val view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+
+        init {
+            view.setOnClickListener(this)
+        }
+
+        override fun onClick(view: View?) {
+            onClickListener?.onClick(entries[adapterPosition], adapterPosition)
+        }
+
         @SuppressLint("SetTextI18n")
         fun bindAt(position: Int) {
             val entry = entries[position]
