@@ -22,6 +22,7 @@
 
 package com.ivanmagda.imyoutube.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -57,7 +58,11 @@ class VideoDetailActivity : AppCompatActivity(), VideoDetailAdapter.OnClickListe
     }
 
     override fun onClick(selectedEntry: VideoEntry, position: Int) {
-        Log.d(LOG_TAG, "onClick(selectedEntry: VideoEntry, position: Int)")
+        val intent = Intent(this, WebViewActivity::class.java)
+        intent.putExtra(WebViewActivity.TITLE_EXTRA_KEY, selectedEntry.name)
+        intent.putExtra(WebViewActivity.URL_EXTRA_KEY, selectedEntry.link)
+
+        startActivity(intent)
     }
 
     private fun setup() {

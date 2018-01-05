@@ -23,12 +23,22 @@
         <activity
             android:name=".activities.VideoDetailActivity"
             android:label="@string/activity_detail_label"
+            android:launchMode="singleTop"
             android:parentActivityName=".activities.FeedActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.FeedActivity" />
+        </activity>
+        <activity
+            android:name=".activities.WebViewActivity"
+            android:parentActivityName=".activities.VideoDetailActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.VideoDetailActivity" />
         </activity>
     </application>
 
